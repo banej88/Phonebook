@@ -7,23 +7,25 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 public class Listeners implements ActionListener {
 
-							private JTextArea name;
-							private JTextArea surname;
-							private JTextArea address;
-							private JTextArea phone;
-							private JTextArea result;
-							private JTextArea jmbg;
+							private JTextField name;
+							private JTextField surname;
+							private JTextField address;
+							private JTextField phone;
+							private JTextPane result;
+							private JTextField jmbg;
 							private JButton search;
 							private JButton insert;
 							private JLabel error;
 							Database b;
 							
 							
-							public Listeners(JTextArea name,JTextArea surname,JTextArea address,JTextArea phone,
-									JButton insert,JTextArea result,JButton search,JTextArea jmbg,JLabel error) {
+							public Listeners(JTextField name,JTextField surname,JTextField address,JTextField phone,
+									JButton insert,JTextPane result,JButton search,JTextField jmbg,JLabel error) {
 								
 								
 								this.name=name;
@@ -71,7 +73,7 @@ public class Listeners implements ActionListener {
 											try {
 												b.add(name.getText(), surname.getText(), address.getText(), phone.getText(),jmbgs);
 												
-												result.setText("Sucessfuly added\n"+"Jmbg: "+jmbgs+"\nName: "+name.getText()+"\nSurname: "+surname.getText()+"\nAddress: "+address.getText()+"\nPhone: "+phone.getText());
+												result.setText("Sucessfuly added\n\n"+"Jmbg: "+jmbgs+"\nName: "+name.getText()+"\nSurname: "+surname.getText()+"\nAddress: "+address.getText()+"\nPhone: "+phone.getText());
 												
 											} catch (Exception e) {
 												// TODO Auto-generated catch block

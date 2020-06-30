@@ -41,7 +41,7 @@ public class Database {
 							
 							String searchq="";
 
-							searchq = "Select * from people";	
+							searchq = "Select * from people where name LIKE "+"'"+name+"%'";	
 							
 							
 						
@@ -60,7 +60,7 @@ public class Database {
 							
 							while(rs.next()) {
 								
-									r = r+"Person "+i+"\n"+"Jmbg: "+rs.getString("jmbg")+"\nName: "+rs.getString("name")+"\nSurname: "+rs.getString("surname")+"\nAddress: "+rs.getString("address")+"\nPhone: "+rs.getString("phone")+"\n\n";
+									r = r+"Result: "+i+"\n\n"+"Jmbg: "+rs.getString("jmbg")+"\nName: "+rs.getString("name")+"\nSurname: "+rs.getString("surname")+"\nAddress: "+rs.getString("address")+"\nPhone: "+rs.getString("phone")+"\n\n";
 									i++;
 							}
 							

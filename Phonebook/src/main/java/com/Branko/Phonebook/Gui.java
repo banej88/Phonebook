@@ -1,6 +1,9 @@
 package com.Branko.Phonebook;
 
 import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -12,17 +15,18 @@ public class Gui implements Runnable {
 
 				
 							private JFrame frame;
-							private JTextArea name=new JTextArea();
-							private JTextArea surname=new JTextArea();
-							private JTextArea address=new JTextArea();
-							private JTextArea phone=new JTextArea();
+							private JTextField name=new JTextField();
+							private JTextField surname=new JTextField();
+							private JTextField address=new JTextField();
+							private JTextField phone=new JTextField();
 							private JButton search=new JButton("Serach");
 							private JButton insert=new JButton("Insert");
-							private JTextArea result = new JTextArea();
-							private JTextArea jmbg = new JTextArea();
+							private JTextPane result = new JTextPane();
+							private JTextField jmbg = new JTextField();
 							private JLabel error = new JLabel();
 							private Font f = new Font("Ariel",Font.PLAIN,17);
 							private Font r = new Font("Ariel",Font.PLAIN,15);
+							private JScrollPane jp;
 							
 							
 							public void run() {
@@ -30,17 +34,20 @@ public class Gui implements Runnable {
 								
 									frame = new JFrame("Phonebook");
 									
-									frame.setPreferredSize(new Dimension(1180,450));
+									frame.setPreferredSize(new Dimension(600,650));
 									
 									frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 									
-									createComponent(frame.getContentPane());
+									createComponent(frame.getContentPane());		
+									
+									ImageIcon icon = new ImageIcon("resources/phonebook.png");
+									frame.setIconImage(icon.getImage());
+									
+									
 									frame.pack();
 									
-									JScrollPane scroll = new JScrollPane (result, 
-									JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-									frame.add(scroll);
+									
+									frame.setLocationRelativeTo(null);
 									
 									frame.setVisible(true);
 									
@@ -54,21 +61,56 @@ public class Gui implements Runnable {
 									address.setFont(f);
 									phone.setBorder(new LineBorder(Color.BLACK));
 									phone.setFont(f);
-									result.setBorder(new LineBorder(Color.BLACK));
-									result.setFont(r);
 									result.setEditable(false);
-									result.setBackground(Color.black);
-									result.setForeground(Color.white);
+									result.setBackground(Color.white);
+									result.setForeground(Color.black);
+									
+									
+									
+									SimpleAttributeSet attributeSet = new SimpleAttributeSet();
+								    StyleConstants.setItalic(attributeSet, true);
+								    StyleConstants.setAlignment(attributeSet, StyleConstants.ALIGN_CENTER);
+								    StyleConstants.setFontSize(attributeSet, 18);
+								    StyleConstants.setForeground(attributeSet, Color.black);
+								    StyleConstants.setBackground(attributeSet, Color.white);
+								    result.setCharacterAttributes(attributeSet, true);
+								    result.setParagraphAttributes(attributeSet, false);
+								    Border border = BorderFactory.createLineBorder(Color.BLACK);
+								    result.setBorder(BorderFactory.createCompoundBorder(border,
+								            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+								    
+							        
+								    		
 									
 							}
 							
 							public void createComponent(Container container) {
 								
-										GridLayout layout = new GridLayout(1, 2);	
-						        		container.setLayout(layout);
+										jp = new JScrollPane(resultGrid(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+										jp.setBorder(null);
+										
+										container.setLayout(new GridLayout(2,1));
+
 						        		container.add(group());
-						        		container.add(result);
+						        		container.add(jp);
+
 						        		
+							}
+							
+							public JPanel resultGrid() {
+								
+								JPanel pane = new JPanel();
+								pane.setLayout(new BorderLayout());
+								
+								
+								pane.add(new JLabel(" "),BorderLayout.NORTH);
+								pane.add(new JLabel("   "),BorderLayout.EAST);
+								pane.add(new JLabel("   "),BorderLayout.WEST);
+								pane.add(new JLabel(" "),BorderLayout.SOUTH);
+								pane.add(result,BorderLayout.CENTER);
+								
+								
+								return pane;
 							}
 							
 							public JPanel jmbgGrid() {
