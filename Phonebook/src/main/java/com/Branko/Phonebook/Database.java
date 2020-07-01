@@ -13,9 +13,9 @@ public class Database {
 						
 						public Database() {
 							
-							this.url="jdbc:mysql://localhost:3306/phonebook";
-							this.username="root";
-							this.password="3126031260";
+							this.url="jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7351957";
+							this.username="sql7351957";
+							this.password="8pGmQHebMF";
 							
 							
 							
@@ -38,16 +38,25 @@ public class Database {
 						
 						public String load(String name,String surname,String address,String phone,Integer jmbg) throws Exception {
 							
+							String nameSQL="'"+name+"%'";
+							String surnameSQL="'"+surname+"%'";
+							String addressSQL="'"+address+"%'";
+							String phoneSQL="'"+phone+"%'";
 							
 							String searchq="";
-
-							searchq = "Select * from people where name LIKE "+"'"+name+"%'";	
 							
+							
+							if(jmbg!=null || !name.isEmpty() || !surname.isEmpty() || !address.isEmpty() || !phone.isEmpty()) {
+								
+							searchq = "Select * from people where name LIKE"+nameSQL+" && surname LIKE"+surnameSQL+
+									" && address LIKE"+addressSQL+" && phone LIKE"+phoneSQL;	
+								
+							}
 							
 						
-							if(name.isEmpty() && surname.isEmpty() && address.isEmpty() && phone.isEmpty()){
+							if(jmbg==null && name.isEmpty() && surname.isEmpty() && address.isEmpty() && phone.isEmpty()){
 								
-								searchq = "Select 1 from dual where false";
+							searchq = "Select 1 from dual where false";
 								
 							}
 							

@@ -24,6 +24,10 @@ public class Gui implements Runnable {
 							private JTextPane result = new JTextPane();
 							private JTextField jmbg = new JTextField();
 							private JLabel error = new JLabel();
+							private JLabel errorName = new JLabel();
+							private JLabel errorSurname = new JLabel();
+							private JLabel errorAddress = new JLabel();
+							private JLabel errorPhone = new JLabel();
 							private Font f = new Font("Ariel",Font.PLAIN,17);
 							private Font r = new Font("Ariel",Font.PLAIN,15);
 							private JScrollPane jp;
@@ -64,6 +68,11 @@ public class Gui implements Runnable {
 									result.setEditable(false);
 									result.setBackground(Color.white);
 									result.setForeground(Color.black);
+									error.setForeground(Color.RED);
+									errorName.setForeground(Color.RED);
+									errorSurname.setForeground(Color.RED);
+									errorAddress.setForeground(Color.RED);
+									errorPhone.setForeground(Color.RED);
 									
 									
 									
@@ -132,7 +141,7 @@ public class Gui implements Runnable {
 								pane.add(nameID);
 								nameID.setFont(f);
 								pane.add(this.name);
-								pane.add(new JLabel());
+								pane.add(errorName);
 								
 								return pane;
 							}
@@ -144,7 +153,7 @@ public class Gui implements Runnable {
 								pane.add(surnameID);
 								surnameID.setFont(f);
 								pane.add(this.surname);
-								pane.add(new JLabel());
+								pane.add(errorSurname);
 
 								return pane;
 							}
@@ -156,7 +165,7 @@ public class Gui implements Runnable {
 								pane.add(addressID);
 								addressID.setFont(f);
 								pane.add(this.address);
-								pane.add(new JLabel());
+								pane.add(errorAddress);
 
 								return pane;
 							}
@@ -168,7 +177,7 @@ public class Gui implements Runnable {
 								pane.add(phoneID);
 								phoneID.setFont(f);
 								pane.add(this.phone);
-								pane.add(new JLabel());
+								pane.add(errorPhone);
 
 								return pane;
 							}
@@ -181,7 +190,7 @@ public class Gui implements Runnable {
 								pane.add(new JLabel());
 								pane.add(this.insert);
 								pane.add(new JLabel());
-								Listeners b = new Listeners(name,surname,address,phone,insert,result,search,jmbg,error);
+								Listeners b = new Listeners(name,surname,address,phone,insert,result,search,jmbg,error,errorName,errorSurname,errorAddress,errorPhone);
 								insert.addActionListener(b);
 								pane.add(search);
 								search.addActionListener(b);

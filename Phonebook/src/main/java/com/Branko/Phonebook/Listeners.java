@@ -21,11 +21,16 @@ public class Listeners implements ActionListener {
 							private JButton search;
 							private JButton insert;
 							private JLabel error;
+							private JLabel errorName;
+							private JLabel errorSurname;
+							private JLabel errorAddress;
+							private JLabel errorPhone;
 							Database b;
 							
 							
 							public Listeners(JTextField name,JTextField surname,JTextField address,JTextField phone,
-									JButton insert,JTextPane result,JButton search,JTextField jmbg,JLabel error) {
+									JButton insert,JTextPane result,JButton search,JTextField jmbg,JLabel error,
+									JLabel errorName,JLabel errorSurname,JLabel errorAddress,JLabel errorPhone) {
 								
 								
 								this.name=name;
@@ -37,6 +42,10 @@ public class Listeners implements ActionListener {
 								this.search=search;
 								this.jmbg=jmbg;
 								this.error=error;
+								this.errorName=errorName;
+								this.errorSurname=errorSurname;
+								this.errorAddress=errorAddress;
+								this.errorPhone=errorPhone;
 								this.b = new Database();
 								
 							}
@@ -56,7 +65,7 @@ public class Listeners implements ActionListener {
 										
 										}else if(!jmbg.getText().matches("^[0-9]*$")){
 											
-											error.setText("Please enter number value");
+											error.setText(" Please enter numbers only");
 										}
 										
 										
@@ -64,14 +73,43 @@ public class Listeners implements ActionListener {
 										
 										if(ae.getSource()==insert) {
 											
-											if(name.getText().isEmpty() || surname.getText().isEmpty() || 
+											if(jmbg==null || name.getText().isEmpty() || surname.getText().isEmpty() || 
 													address.getText().isEmpty() || phone.getText().isEmpty() || jmbg.getText().isEmpty()) {
+													
+													if(jmbg.getText().isEmpty()) {
+														error.setText(" Please enter Jmbg");
+													}
+													if(name.getText().isEmpty()) {
+														errorName.setText(" Please enter Name");
+													}else {
+														errorName.setText("");
+													}
+													if(surname.getText().isEmpty()) {
+														errorSurname.setText(" Please enter Surname");
+													}else {
+														errorSurname.setText("");
+													}
+													if(address.getText().isEmpty()) {
+														errorAddress.setText(" Please enter Address");
+													}else {
+														errorAddress.setText("");
+													}
+													if(phone.getText().isEmpty()) {
+														errorPhone.setText(" Please enter Phone");
+													}else {
+														errorPhone.setText("");
+													}
 												
 												
 											}else {
 											
 											try {
 												b.add(name.getText(), surname.getText(), address.getText(), phone.getText(),jmbgs);
+												errorPhone.setText("");
+												errorAddress.setText("");
+												errorSurname.setText("");
+												errorName.setText("");
+												error.setText("");
 												
 												result.setText("Sucessfuly added\n\n"+"Jmbg: "+jmbgs+"\nName: "+name.getText()+"\nSurname: "+surname.getText()+"\nAddress: "+address.getText()+"\nPhone: "+phone.getText());
 												
@@ -90,7 +128,11 @@ public class Listeners implements ActionListener {
 												try {
 													
 													result.setText(b.load(name.getText(), surname.getText(), address.getText(), phone.getText(),jmbgs));
-													
+													errorPhone.setText("");
+													errorAddress.setText("");
+													errorSurname.setText("");
+													errorName.setText("");
+													error.setText("");
 													
 												} catch (Exception e) {
 													// TODO Auto-generated catch block
