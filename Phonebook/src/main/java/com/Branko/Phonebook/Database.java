@@ -13,9 +13,9 @@ public class Database {
 						
 						public Database() {
 							
-							this.url="jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7351957";
-							this.username="sql7351957";
-							this.password="8pGmQHebMF";
+							this.url="jdbc:mysql://localhost:3306/phonebook";
+							this.username="root";
+							this.password="3126031260";
 							
 							
 							
@@ -44,17 +44,23 @@ public class Database {
 							String phoneSQL="'"+phone+"%'";
 							
 							String searchq="";
+							String jmbgText = "'"+jmbg+"%'";
+							jmbgText.trim();
+							
+							if(jmbg==-1) {
+								jmbgText="'%'";
+							}
 							
 							
 							if(jmbg!=null || !name.isEmpty() || !surname.isEmpty() || !address.isEmpty() || !phone.isEmpty()) {
 								
-							searchq = "Select * from people where name LIKE"+nameSQL+" && surname LIKE"+surnameSQL+
+							searchq = "Select * from people where jmbg LIKE"+jmbgText+" && name LIKE"+nameSQL+" && surname LIKE"+surnameSQL+
 									" && address LIKE"+addressSQL+" && phone LIKE"+phoneSQL;	
 								
 							}
 							
-						
-							if(jmbg==null && name.isEmpty() && surname.isEmpty() && address.isEmpty() && phone.isEmpty()){
+							
+							if(jmbg.intValue()==-1 && name.isEmpty() && surname.isEmpty() && address.isEmpty() && phone.isEmpty()){
 								
 							searchq = "Select 1 from dual where false";
 								
@@ -72,9 +78,7 @@ public class Database {
 									r = r+"Result: "+i+"\n\n"+"Jmbg: "+rs.getString("jmbg")+"\nName: "+rs.getString("name")+"\nSurname: "+rs.getString("surname")+"\nAddress: "+rs.getString("address")+"\nPhone: "+rs.getString("phone")+"\n\n";
 									i++;
 							}
-							
-							
-							
+				
 							st.close();
 							con.close();
 								

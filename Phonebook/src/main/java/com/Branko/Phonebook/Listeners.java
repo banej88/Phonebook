@@ -67,9 +67,7 @@ public class Listeners implements ActionListener {
 											
 											error.setText(" Please enter numbers only");
 										}
-										
-										
-										
+
 										
 										if(ae.getSource()==insert) {
 											
@@ -113,6 +111,14 @@ public class Listeners implements ActionListener {
 												
 												result.setText("Sucessfuly added\n\n"+"Jmbg: "+jmbgs+"\nName: "+name.getText()+"\nSurname: "+surname.getText()+"\nAddress: "+address.getText()+"\nPhone: "+phone.getText());
 												
+												name.setText("");
+												surname.setText("");
+												address.setText("");
+												phone.setText("");
+												jmbg.setText("");
+												
+												
+												
 											} catch (Exception e) {
 												// TODO Auto-generated catch block
 												e.printStackTrace();
@@ -123,6 +129,11 @@ public class Listeners implements ActionListener {
 
 											
 										}else if(ae.getSource()==search) {
+											
+											if(jmbg.getText().isEmpty()) {
+												
+												jmbgs=-1;
+											}
 											
 											
 												try {
